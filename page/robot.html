@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="robot.css">
+    <script>
+        function send(event){
+          // 如果是键盘事件且不是enter事件,返回
+            if(event instanceof  KeyboardEvent && event.key != "Enter"){
+                return;
+            }
+            //每说一句就创建一个p标签，添加到content中
+            var val = document.getElementById('chatArea').value;
+            if(val == null || val == ''){
+                return;
+            }
+            // console.log(val);
+            var me = document.createElement('p');
+            me.style.color= 'blue';
+            me.innerHTML = "我；" + val;
+            document.getElementsByClassName('content')[0].appendChild(me);
+            document.getElementById('chatArea').value = '';
+            //此处发ajax请求。不能直接重展示层向tuning机器人发ajax请求，因为跨域了。
+            // 图灵机器人api https://www.kancloud.cn/turing/www-tuling123-com/718227
+            //服务器端设置 Access-Control-Allow-Origin；
+
+            var ajax = new XMLHttpRequest();
+             ajax.open('get','http://127.0.0.1:12306/chat?text='+val)
+             ajax.send();
+             ajax.onreadystatechange = function(){
+                 if(ajax.readyState == 4 && ajax.status == 200){
+                     console.log(ajax.responseText);
+                     var temp = document.createElement('p');
+                     temp.innerHTML = '机器人：' + JSON.parse(ajax.responseText).text;
+                     document.getElementsByClassName('content')[0].appendChild(temp);
+                 }
+             }
+        }
+
+
+    </script>
+</head>
+<body>
+     <div id="chat">
+         <div class="head">聊天机器人</div>
+         <div class="content"></div>
+         <div class="input">
+             <input type="text" id="chatArea" onkeydown="send(event)">
+             <div id="sendBtn" onclick="send(event)">发送</div>
+         </div>
+     </div>
+</body>
+</html>

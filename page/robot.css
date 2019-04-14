@@ -1,0 +1,66 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+html,body{
+    width:100%;
+    height: 100%;
+
+}
+#chat{
+    width:450px;
+    height:700px;
+    position:relative;
+    margin-right: auto;
+    margin-left:auto;
+    background:blue;
+}
+.head{
+    width:100%;
+    height:50px;
+    background:#5e5e5e;
+    text-align: center;
+    line-height:50px;
+    color:white;
+    font-size: 20px;
+}
+.content{
+    width:100%;
+    height:600px;
+    background:#ebebeb;
+    overflow-y: scroll;
+}
+.input{
+    width:100%;
+    height:50px;
+    background:#d3d3d3;
+    position:relative;
+}
+/*功能有且只有一个用ID；带动作的重要的用id*/
+#chatArea{
+    width:350px;
+    /*height一般比字体多一点，字体一般22px*/
+    height:25px;
+    border:0px ;
+    position:absolute;
+    margin-left:10px;
+    top:50%;
+    /*向下取整*/
+    margin-top:-12px;
+    outline:none;
+    border-radius:5px;
+}
+#sendBtn{
+    width:65px;
+    height:25px;
+    background:yellowgreen;
+    color:white;
+    text-align: center;
+    line-height: 25px;
+    top:50%;
+    margin-top:-12px;
+    margin-left:370px;
+    cursor:pointer;
+    position:absolute;
+    border-radius:5px;
+}
